@@ -8,7 +8,6 @@ import me.gabreuw.youtube_tracklist.utils.FileHelper;
 
 import java.io.File;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 public class MainApplication {
@@ -35,6 +34,9 @@ public class MainApplication {
                 .forEach(cache::add);
 
         repository.save(controller.createTrackList());
+
+        System.out.println("TrackList criada com sucesso.");
+
         scanner.close();
     }
 }
