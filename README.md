@@ -38,10 +38,14 @@ Print da tracklist criada em um arquivo .txt (output.txt):
     >
 </p>
 
+---
+
 <h2>Futuras atualizações</h2>
 
 - Implementação de uma interface gráfica, no caso pretendo usar JavaFX.
 - ...
+
+---
 
 <h2>Contribuição</h2>
 
