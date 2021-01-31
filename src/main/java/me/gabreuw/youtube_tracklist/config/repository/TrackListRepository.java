@@ -1,7 +1,8 @@
 package me.gabreuw.youtube_tracklist.config.repository;
 
-import me.gabreuw.youtube_tracklist.controller.TrackListController;
 import me.gabreuw.youtube_tracklist.model.entities.MusicTrackList;
+import me.gabreuw.youtube_tracklist.sercurity.error.ApplicationException;
+import me.gabreuw.youtube_tracklist.utils.AudioDurationFormatter;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -10,22 +11,14 @@ import java.util.List;
 
 public class TrackListRepository {
 
-    private final String OUTPUT = "D:\\JetBrains\\IdeaProjects\\YouTube Tracklist\\src\\main\\resources\\output.txt";
-
-    private final TrackListController CONTROLLER;
-
-    public TrackListRepository(TrackListController controller) {
-        CONTROLLER = controller;
-    }
-
-    public void save(List<MusicTrackList> trackList) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(OUTPUT, false))) {
-            for (MusicTrackList music : trackList) {
-                writer.write(CONTROLLER.formatMusicToTrackList(music));
+    public void writeTrackList(List<MusicTrackList> musics, String outputPath) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputPath, false))) {
+            for (MusicTrackList music : musics) {
+                writer.write(AudioDurationFormatter.formatMusicToTrackList(music));
                 writer.newLine();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new ApplicationException("Ocorreu um erro ao criar a tracklist.");
         }
     }
 }
